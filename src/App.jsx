@@ -9,6 +9,7 @@ import About from './Components/About'
 import ProductDetails from './Components/ProductDetails'
 import Login from './Components/Pages/Login'
 import Register from './Components/Pages/Register'
+import RegisterUserUpdate from './Components/RegisterUserUpdate'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/allUser' element={<AllUsers/>}></Route>
+        <Route path='/update/:id' element={<RegisterUserUpdate/>}></Route>
         <Route path='/about' element={<About/>}></Route>
         <Route path='/:id' element={<ProductDetails></ProductDetails>}> </Route>
         
