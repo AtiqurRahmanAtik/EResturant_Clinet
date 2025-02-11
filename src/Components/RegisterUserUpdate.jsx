@@ -1,5 +1,5 @@
 import {  useEffect, useState,  } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -8,6 +8,8 @@ const RegisterUserUpdate = () => {
 
     const {id} = useParams();
     console.log(id);
+    const navigate = useNavigate();
+
     const [updateRegister,SetUpdateRegister]= useState([]);
     
 
@@ -23,6 +25,45 @@ const RegisterUserUpdate = () => {
     },[id])
 
 
+    // handleUpdate User
+    const handleUpdateUser=(e)=>{
+      e.preventDefault();
+      const form = e.target;
+      const email = form.email.value;
+      const name = form.name.value;
+      const password = form.password.value;
+      
+      const updateUser = {name,email,password};
+      console.log(updateUser);
+
+      // update spacefice id of data or RegisterUser
+      axios.put(`http://localhost:5000/register/${id}`, updateUser)
+      .then(res=>{
+        console.log(res.data);
+
+         if(res.data.modifiedCount > 0){
+        
+
+
+          Swal.fire({
+                      position: "top-end",
+                       icon: "success",
+                       title: "Your Registration Successful",
+                      showConfirmButton: false,
+                      timer: 2000
+                     });
+       }
+
+      //  navigate to alluser page
+       navigate('/allUser')
+
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    }
+
+
    
     return (
         <div>
@@ -32,7 +73,7 @@ const RegisterUserUpdate = () => {
             <div className="card bg-base-100 w-full  shrink-0 shadow-2xl">
             <div className="card-body mx-auto">
               {/* form here */}
-              <form   className="lg:w-[500px] ">
+              <form onSubmit={handleUpdateUser}   className="lg:w-[500px] ">
                 <label className="fieldset-label text-2xl text-black">
                   Name
                 </label>
