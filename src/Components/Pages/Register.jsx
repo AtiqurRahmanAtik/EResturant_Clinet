@@ -13,7 +13,7 @@ const Register = () => {
     const { RegisterUser} = useContext(AuthContext);
     const {GoogleSingIn} = useContext(AuthContext);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     
@@ -87,6 +87,9 @@ const Register = () => {
           showConfirmButton: false,
           timer: 2000
         });
+
+        // navigate into home page 
+        navigate('/');
 
       })
       .catch(err=>{
