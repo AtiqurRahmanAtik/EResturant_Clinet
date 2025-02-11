@@ -5,11 +5,13 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { toast, } from "react-toastify";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 
 const Register = () => {
 
     const { RegisterUser} = useContext(AuthContext);
+    const {GoogleSingIn} = useContext(AuthContext);
 
     // const navigate = useNavigate();
 
@@ -66,6 +68,31 @@ const Register = () => {
         })
       
     
+
+    }
+
+    // handleGoogleSingIN
+    const handleGoogle = ()=>{
+      console.log('google');
+
+      GoogleSingIn()
+      .then(res=>{
+        console.log(res.user);
+        
+        // sweet alert
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Google Registration Successful",
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+
 
     }
 
@@ -130,6 +157,12 @@ const Register = () => {
                   </h1>
                 </div>
               </form>
+
+            <div className="">
+        
+            <button onClick={handleGoogle} className="btn p-y flex gap-1 border mx-auto w-2xs items-center  text-3xl font-bold bg-amber-300">
+            <FcGoogle className="text-4xl "></FcGoogle>  Google </button>
+            </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 
 const ProductCard = ({item}) => {
-    console.log(item);
+    // console.log(item);
 
     const {_id,title,description,category,price,discountPercentage,rating} = item;
 

@@ -1,9 +1,12 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../../Firebase/Firebase.Config";
 import axios from "axios";
+import { GoogleAuthProvider } from "firebase/auth";
+
 
 export  const AuthContext = createContext(null);
+const GoogleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({children}) => {
 
@@ -14,7 +17,7 @@ const AuthProvider = ({children}) => {
     // registerUser get form db api 
     const [registerUser , SetRegisterUser]= useState([]);
 
-    console.log(registerUser);
+    // console.log(registerUser);
     
     axios.get('http://localhost:5000/register')
     .then(res=>{
@@ -37,16 +40,26 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
+    // Google SingIN
+    const GoogleSingIn = ()=>{
+        return signInWithPopup(auth, GoogleProvider)
+    }
+
+    // SingOUt 
+    const SingOutUser = ()=>{
+        return signOut(auth)
+    }
+
 
 
     // Observation
    
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, CurrentUser => {
-            if (CurrentUser) 
+          
                 SetUser(CurrentUser);
-            else SetUser(false);
-            // console.log('auth sage change : ', CurrentUser);
+          
+            console.log('auth sage change : ', CurrentUser);
 
             SetLoader(false); 
         });
@@ -65,6 +78,8 @@ const AuthProvider = ({children}) => {
         RegisterUser,
         LoginUser,
         registerUser,
+        GoogleSingIn,
+        SingOutUser 
 
     }
 

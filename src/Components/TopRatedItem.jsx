@@ -11,7 +11,7 @@ const TopRatedItem = () => {
 
     const assendingProduct = TopRated.sort((a,b)=> b.rating - a.rating);
 
-    console.log(assendingProduct)
+    // console.log(assendingProduct)
 
     useEffect(()=>{
         fetch('http://localhost:5000/user')
