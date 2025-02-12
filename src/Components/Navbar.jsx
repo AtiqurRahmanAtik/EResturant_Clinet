@@ -68,9 +68,7 @@ const Navbar = () => {
     </ul>
   </div>
 
-  {/* <div className="navbar-end">
-    <Link to={'/login'}> <button className="btn bg-orange-500 text-2xl border-none">Login</button></Link>
-  </div>  */}
+
 
   {/* bag Icon */}
 
@@ -82,9 +80,9 @@ const Navbar = () => {
 
 <div className="navbar-end">
 <div  className="dropdown dropdown-end">
-<div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-  <div className="w-10 rounded-full">
-    <img
+<div tabIndex={0} role="button" className="btn w-14 btn-ghost btn-circle  avatar">
+  <div className="w-14  rounded-full">
+    <img 
       alt="Tailwind CSS Navbar component"
       src={user?.photoURL}  />
   </div>
@@ -93,13 +91,13 @@ const Navbar = () => {
   tabIndex={0}
   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
   <li>
-    <a className="justify-between">
+    <a className="justify-between hover:bg-amber-200 text-xl">
      {user?.displayName}
      
     </a>
   </li>
-  <li><a>Settings</a></li>
-  <li><button onClick={handleLogOut}>Logout</button></li>
+  <li><a className="hover:bg-amber-200 text-xl">Settings</a></li>
+  <li><button className="hover:bg-amber-200 text-xl" onClick={handleLogOut}>Logout</button></li>
 </ul>
 </div> 
 

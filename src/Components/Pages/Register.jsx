@@ -1,17 +1,22 @@
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { toast, } from "react-toastify";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import { BsEyeSlashFill } from "react-icons/bs";
+import { IoEyeSharp } from "react-icons/io5";
+
 
 
 const Register = () => {
 
     const { RegisterUser} = useContext(AuthContext);
     const {GoogleSingIn} = useContext(AuthContext);
+    const [show, SetShow] = useState(true);
+    console.log('show', show)
 
     const navigate = useNavigate();
 
@@ -99,6 +104,13 @@ const Register = () => {
 
     }
 
+
+    // handleEyeButton 
+    const handleEyeButton = ()=>{
+     
+      SetShow(!show);
+    }
+
    
 
   return (
@@ -132,15 +144,24 @@ const Register = () => {
                   className="input w-full"
                   placeholder="Enter Your Email"
                 />
+                <div className="relative ">
                 <label className="fieldset-label text-2xl text-black">
                   Password
                 </label>
+
                 <input
-                  type="password"
+                  type={show ? "text" : "password" }
                   name="password"
                   className="input w-full"
                   placeholder="Enter Your Password"
                 />
+             
+
+               {
+                show ?  <IoEyeSharp onClick={handleEyeButton} className="text-4xl absolute bottom-1 right-2"> </IoEyeSharp> :    <BsEyeSlashFill onClick={handleEyeButton} className="text-4xl absolute bottom-1 right-2"></BsEyeSlashFill>
+               }
+                </div>
+              
 
                 <div className="text-center">
                   <button className="btn bg-orange-500 text-2xl mt-4 w-2xs">
