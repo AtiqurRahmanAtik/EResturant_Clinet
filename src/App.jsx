@@ -10,6 +10,8 @@ import ProductDetails from './Components/ProductDetails'
 import Login from './Components/Pages/Login'
 import Register from './Components/Pages/Register'
 import RegisterUserUpdate from './Components/RegisterUserUpdate'
+import PrivateRoutes from './Components/PrivateRoutess/PrivateRoutes'
+
 
 
 function App() {
@@ -26,7 +28,11 @@ function App() {
         <Route path='*' element={<NotFound/>}> </Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
-        <Route path='/allUser' element={<AllUsers/>}></Route>
+    
+       <Route path='/allUser'  element={<AllUsers/>}></Route>
+      
+       
+       
         <Route path='/update/:id' element={<RegisterUserUpdate/>}></Route>
         <Route path='/about' element={<About/>}></Route>
         <Route path='/:id' element={<ProductDetails></ProductDetails>}> </Route>
