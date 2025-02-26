@@ -20,6 +20,8 @@ const ProductCard = ({item}) => {
        {title}
       
     </h2>
+
+    <h2>Price : {price}</h2>
     <p> {description}</p>
 
 
