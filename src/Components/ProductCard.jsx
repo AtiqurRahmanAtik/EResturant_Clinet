@@ -7,6 +7,11 @@ const ProductCard = ({item}) => {
     const {_id,title,description,category,price,discountPercentage,rating} = item;
 
 
+    // handleBuy Button 
+    const handleBuy = (item)=>{
+      console.log(item);
+    }
+
     return (
         <div>
             <div className="card bg-base-100  shadow-sm">
@@ -27,7 +32,7 @@ const ProductCard = ({item}) => {
 
       {/* Buy Button  */}
     <div className="card-actions justify-evenly my-2">
-      <button className="btn text-2xl font-semibold  bg-orange-500">Buy</button>
+      <button onClick={()=> handleBuy(item)} className="btn text-2xl font-semibold  bg-orange-500">Buy</button>
       <Link to={`/${_id}`}> <button className="btn text-2xl font-semibold bg-orange-500">Details</button></Link>
     </div>
   </div>

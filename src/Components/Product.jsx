@@ -2,9 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { AuthContext } from "./Provider/AuthProvider";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const Product = () => {
-  const [item, setItem] = useState([]);
+  // const [item, setItem] = useState([]);
 
   const [priceButton, SetPriceButton] = useState(true);
   const[BigPrice,SetBigPrice]= useState([]);
@@ -15,7 +16,9 @@ const Product = () => {
 
   // console.log(item);
   const { loader, SetLoader } = useContext(AuthContext);
-  const[searhItem,SetSearhItem] = useState('');
+  const [searhItem,SetSearhItem] = useState('');
+
+  // console.log(searhItem)
 
    // show big Price 
    useEffect(()=>{
@@ -27,18 +30,29 @@ const Product = () => {
   },[])
 
 //   all Product data  from user api
-  const url = "http://localhost:5000/user";
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
+  // const url = "http://localhost:5000/user";
+  // useEffect(() => {
+  //   fetch(url)
+  //     .then((res) => res.json())
    
-    .then(data=> setItem(data))
-    SetLoader(false);
-  }, [SetLoader]);
+  //   .then(data=> setItem(data))
+  //   SetLoader(false);
+  // }, [SetLoader]);
 
+
+  // using  Tanstack Query
+  const {data: Item,isLoading,refetch} = useQuery({
+    queryKey: ['product'],
+    queryFn: async () => {
+      const res = await axios.get('http://localhost:5000/user')
+      return res.data;
+      
+    },
+   
+  })
 
 //   loader here
-  if (loader) {
+  if (isLoading) {
     return (
       <>
         <span className="loading loading-spinner text-primary"></span>
@@ -51,15 +65,26 @@ const Product = () => {
         <span className="loading loading-spinner text-error"></span>
       </>
     );
-  }
+  };
 
-  const titleSearh = item.map(v=> v.title.toLowerCase().includes(searhItem));
-
-  // console.log(titleSearh)
+  refetch();
 
 
-      const handleSearching = ()=>{
-        // console.log('searhing ');
+    const searhingOutPut = Item?.filter(val=> val.title?.toLowerCase().includes(searhItem.toLowerCase()));
+
+  // console.log(searhingOutPut);
+
+
+
+    // console.log(searhItem);
+
+      const handleSearching = (e)=>{
+        e.preventDefault();
+        const form = e.target;
+        const searchVal = form.name.value;
+        SetSearhItem(searchVal);
+
+        // console.log('searhing ', searchVal);
 
        
       };
@@ -67,7 +92,7 @@ const Product = () => {
 
      
       const bigPrice = BigPrice.sort((a,b)=> b.price - a.price);
-      console.log(bigPrice)
+      // console.log(bigPrice)
       // handle Price 
       const handlePrice= ()=>{
         // SetPriceButton(priceButton)
@@ -82,9 +107,13 @@ const Product = () => {
         Our Product Section
       </h1>
 
+
+{/* searching Input Feild */}
       <div className="text-center  my-2 flex gap-2 justify-center justify-items-center ">
         <form onSubmit={handleSearching}>
-          <input className="text-2xl p-2" onChange={(e)=>SetSearhItem(e.target.value)} type="text" name="name" id="" placeholder="Searing Item here " />
+          <input className="text-2xl p-2"  type="text" name="name" id="" placeholder="Searing Item here " /> <br />
+
+          <input className="btn bg-amber-500 my-1" type="submit" value="Search" />
         </form>
 
     <div >
@@ -102,7 +131,7 @@ const Product = () => {
       
 
       <div className="grid gap-3 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
-        {item?.map((item) => (
+        {searhingOutPut?.map((item) => (
           <ProductCard key={item._id} item={item}></ProductCard>
         ))}
       </div>
