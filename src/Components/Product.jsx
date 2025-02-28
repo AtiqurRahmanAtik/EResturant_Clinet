@@ -88,6 +88,8 @@ const Product = () => {
         const searchVal = form.name.value;
         SetSearhItem(searchVal);
 
+        // form.reset();
+
         // console.log('searhing ', searchVal);
 
        
@@ -155,6 +157,11 @@ const Product = () => {
         })
      }
 
+    //  handleResetButton 
+    const handleReset = () =>{
+      refetch();
+    }
+
 
 
 
@@ -166,25 +173,9 @@ const Product = () => {
 
 
 {/* searching Input Feild */}
-      <div className="text-center  my-2 flex flex-row gap-2  justify-center  ">
+      <div className="text-center  my-2 flex flex-col lg:flex-row  gap-2  justify-center items-center justify-items-center ">
 
-        <div>
-        <form className="flex justify-center gap-1" onSubmit={handleSearching}>
-          <input className="text-2xl p-2"  type="text" name="name" id="" placeholder="Search Item here " />
-
-          <input className="btn bg-amber-500 my-1 " type="submit" value="Search" />
-        </form>
-        </div>
-
-   
-
-   <div className=" flex  items-center">
-    
-   <button onClick={handlePrice} className="btn bg-red-500"> {priceButton ? 'High' : "Low" } </button> 
-   </div>
-
-
-   {/* dropdown mene item here */}
+          {/* dropdown mene item here */}
     <div className=" z-10">
       <label htmlFor="for"> Categories</label>
       <form action="">
@@ -200,6 +191,31 @@ const Product = () => {
         </select>
       </form>
    </div>
+
+
+{/* searhing form here */}
+        <div>
+        <form className="flex justify-center gap-1" onSubmit={handleSearching}>
+          <input className="text-2xl p-1"  type="text" name="name" id="" placeholder="Search Item here " />
+
+          <input className="btn bg-amber-500  " type="submit" value="Search" />
+        </form>
+        </div>
+
+   
+
+   <div className="flex    items-center">
+    
+   <button onClick={handlePrice} className="btn hidden lg:block  bg-red-500"> {priceButton ? 'High' : "Low" } </button> 
+   </div>
+
+
+   <div>
+    <button onClick={handleReset} className="btn bg-red-600"> Reset</button>
+   </div>
+
+
+ 
      
      
     
@@ -210,7 +226,7 @@ const Product = () => {
       {/* sort item here  */}
       
 
-      <div className="grid z-20 gap-3 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
+      <div className="grid z-20 gap-3 my-7 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
         {searhingOutPut?.map((item) => (
           <ProductCard key={item._id} item={item}></ProductCard>
         ))}
