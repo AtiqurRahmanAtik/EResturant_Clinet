@@ -18,6 +18,10 @@ const Product = () => {
   const { loader, SetLoader } = useContext(AuthContext);
   const [searhItem,SetSearhItem] = useState('');
 
+  const[selectItem, SetSeletedItem] = useState('');
+
+  console.log(selectItem)
+
   // console.log(searhItem)
 
    // show big Price 
@@ -92,6 +96,7 @@ const Product = () => {
 
      
       const bigPrice = BigPrice.sort((a,b)=> b.price - a.price);
+
       // console.log(bigPrice)
       // handle Price 
       const handlePrice= ()=>{
@@ -101,28 +106,103 @@ const Product = () => {
       }
 
 
+
+      
+
+
+      // dropdown funcanality here
+      const handleSeleted = (e)=> {
+        SetSeletedItem(e.target.value);
+      }
+
+      if(selectItem == 'A to Z Products'){
+        let Uppercase = Item.sort((a,b)=>{
+          const laterA =  a.title ;
+          const laterB = b.title;
+
+          if(laterA < laterB){
+            return -1;
+          }
+         
+
+        });
+        
+      }
+
+
+      if(selectItem == 'Z to A Product'){
+        const LowerCase = Item.sort((a,b)=>{
+          const letterA = a.title;
+          const letterB = b.title;
+
+          if(letterA > letterB){
+            return -1;
+          }
+        })
+      }
+
+     if(selectItem == 'High to Low'){
+
+      let highPrice =   Item.sort((a,b) => {
+          return b.price - a.price;
+        })
+     }
+
+     if(selectItem == 'Low to High'){
+
+      let LowPrice =   Item.sort((a,b) => {
+          return a.price - b.price;
+        })
+     }
+
+
+
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-center my-5">
+    <div className="relative">
+      <h1 className="text-3xl font-bold text-center my-5 ">
         Our Product Section
       </h1>
 
 
 {/* searching Input Feild */}
-      <div className="text-center  my-2 flex gap-2 justify-center justify-items-center ">
-        <form onSubmit={handleSearching}>
-          <input className="text-2xl p-2"  type="text" name="name" id="" placeholder="Searing Item here " /> <br />
+      <div className="text-center  my-2 flex flex-row gap-2  justify-center  ">
 
-          <input className="btn bg-amber-500 my-1" type="submit" value="Search" />
+        <div>
+        <form className="flex justify-center gap-1" onSubmit={handleSearching}>
+          <input className="text-2xl p-2"  type="text" name="name" id="" placeholder="Search Item here " />
+
+          <input className="btn bg-amber-500 my-1 " type="submit" value="Search" />
         </form>
-
-    <div >
+        </div>
 
    
-       <button onClick={handlePrice} className="btn bg-red-500"> {priceButton ? 'High' : "Low" } </button> 
+
+   <div className=" flex  items-center">
+    
+   <button onClick={handlePrice} className="btn bg-red-500"> {priceButton ? 'High' : "Low" } </button> 
+   </div>
+
+
+   {/* dropdown mene item here */}
+    <div className=" z-10">
+      <label htmlFor="for"> Categories</label>
+      <form action="">
+        <select onClick={handleSeleted} name="item" id="">
+        <option value='all'> All</option>
+        <option value='A to Z Products'> A to Z Products</option>
+        <option value='Z to A Product'> Z to A Products</option>
+        <option value='High to Low'> High to Low</option>
+        <option value='Low to High'> Low to High</option>
+        
+         
+       
+        </select>
+      </form>
+   </div>
      
      
-    </div>
+    
 
       
       </div>
@@ -130,7 +210,7 @@ const Product = () => {
       {/* sort item here  */}
       
 
-      <div className="grid gap-3 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
+      <div className="grid z-20 gap-3 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
         {searhingOutPut?.map((item) => (
           <ProductCard key={item._id} item={item}></ProductCard>
         ))}
