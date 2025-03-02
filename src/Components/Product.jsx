@@ -172,6 +172,11 @@ const Product = () => {
       </h1>
 
 
+      <h1 className="text-3xl font-bold text-center my-5 ">
+        Our Product Section
+      </h1>
+
+
 {/* searching Input Feild */}
       <div className="text-center  my-2 flex flex-col lg:flex-row  gap-2  justify-center items-center justify-items-center ">
 
