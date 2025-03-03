@@ -1,14 +1,21 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
+import { BsFacebook } from "react-icons/bs";
 
 const Login = () => {
 
-  const { LoginUser} = useContext(AuthContext);
+  const { LoginUser,FacebookLogin,GoogleSingIn} = useContext(AuthContext);
+
 
   const navigate = useNavigate();
- 
+
+    const location = useLocation();
+    // console.log('login',location)
+    // const  from  = location.state?.from?.pathname || "/"  ;
+    let from = location.state?.from?.pathname || "/";
 
 
   const handleLogin = (e)=>{
@@ -35,7 +42,7 @@ const Login = () => {
                     });
 
                     // navigate to homo
-                    navigate('/');
+                    navigate(from, { replace: true });
       }
 
     })
@@ -47,6 +54,72 @@ const Login = () => {
 
 
   }
+
+
+
+    // handleGoogleSingIN
+      const handleGoogle = ()=>{
+        console.log('google');
+  
+        GoogleSingIn()
+        .then(res=>{
+          console.log(res.user);
+          
+          // sweet alert
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your Google Registration Successful",
+            showConfirmButton: false,
+            timer: 2000
+          });
+  
+          // navigate into home page 
+          // navigate('/');
+          navigate(from, { replace: true });
+  
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+  
+  
+      }
+  
+  
+  
+      // handleFacebook
+      const handleFacebook =() =>{
+  
+        console.log('facebook login ');
+  
+        FacebookLogin()
+        .then(res=>{
+            console.log(res.user);
+            if(res.user){
+                     // sweet alert
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your Facebook Registration Successful",
+            showConfirmButton: false,
+            timer: 2000
+          });
+  
+          // navigate into home page 
+          // navigate('/');
+          navigate(from, { replace: true });
+            }
+         
+  
+  
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      }
+  
+
 
     
   return (
@@ -99,6 +172,27 @@ const Login = () => {
                   </h1>
                 </div>
               </form>
+
+
+              {/* Social Login */}
+                          <div className=" flex gap-2 flex-col-1 lg:flex-row justify-center items-center justify-items-center">
+                      
+                      <div>
+                          <button onClick={handleGoogle} className="btn p-y flex gap-1 border mx-auto w-[230px] items-center  text-3xl font-bold bg-amber-300">
+                          <FcGoogle className="text-4xl "></FcGoogle>  Google </button>
+                          </div>
+                         
+              
+              
+                          <div className="">
+                      
+                      <button onClick={handleFacebook} className="btn p-y flex gap-1 border mx-auto w-[230px] items-center  text-3xl font-bold bg-amber-300">
+                      <BsFacebook className="text-4xl text-blue-600"></BsFacebook>  FaceBook </button>
+                     
+                      </div>
+              
+                      </div>
+              
             </div>
           </div>
         </div>

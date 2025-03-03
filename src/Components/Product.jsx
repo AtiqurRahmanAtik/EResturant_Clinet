@@ -172,9 +172,7 @@ const Product = () => {
       </h1>
 
 
-      <h1 className="text-3xl font-bold text-center my-5 ">
-        Our Product Section
-      </h1>
+
 
 
 {/* searching Input Feild */}

@@ -1,6 +1,6 @@
 
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { toast, } from "react-toastify";
@@ -20,6 +20,8 @@ const Register = () => {
     console.log('show', show)
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const  from  = location.state || { from: { pathname: "/" } };
 
 
     
@@ -73,6 +75,7 @@ const Register = () => {
           console.log(err);
         })
       
+        navigate(from, { replace: true });
     
 
     }
@@ -95,7 +98,8 @@ const Register = () => {
         });
 
         // navigate into home page 
-        navigate('/');
+        // navigate('/');
+        navigate(from, { replace: true });
 
       })
       .catch(err=>{
@@ -126,7 +130,8 @@ const Register = () => {
         });
 
         // navigate into home page 
-        navigate('/');
+        // navigate('/');
+        navigate(from, { replace: true });
           }
        
 
