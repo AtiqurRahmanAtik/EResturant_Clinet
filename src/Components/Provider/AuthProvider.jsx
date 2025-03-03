@@ -3,10 +3,12 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "../../Firebase/Firebase.Config";
 import axios from "axios";
 import { GoogleAuthProvider } from "firebase/auth";
+import { FacebookAuthProvider } from "firebase/auth";
 
 
 export  const AuthContext = createContext(null);
 const GoogleProvider = new GoogleAuthProvider();
+const FacebookProvider = new FacebookAuthProvider();
 
 const AuthProvider = ({children}) => {
 
@@ -45,6 +47,11 @@ const AuthProvider = ({children}) => {
         return signInWithPopup(auth, GoogleProvider)
     }
 
+    // Facebook Login
+    const FacebookLogin = () =>{
+        return signInWithPopup(auth, FacebookProvider)
+    }
+
     // SingOUt 
     const SingOutUser = ()=>{
         return signOut(auth)
@@ -79,7 +86,8 @@ const AuthProvider = ({children}) => {
         LoginUser,
         registerUser,
         GoogleSingIn,
-        SingOutUser 
+        SingOutUser ,
+        FacebookLogin
 
     }
 

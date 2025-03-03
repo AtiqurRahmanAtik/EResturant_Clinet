@@ -1,17 +1,16 @@
-import { useContext, useState } from "react";
-import {Navigate,  } from "react-router";
+import { useContext,} from "react";
+import { Outlet, useNavigate,  } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 
-const PrivateRoutes = ({Component}) => {
+const PrivateRoutes = () => {
 
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    
     const { user} = useContext(AuthContext);;
-     // const navigate = useNavigate();
+     const navigate = useNavigate();
 
- // Your authentication logic goes here...
- 
-  return isAuthenticated ? <Component/> : <Navigate to="/login" />;
+
+  return user ? <Outlet/> : navigate('/login')
    
 };
 

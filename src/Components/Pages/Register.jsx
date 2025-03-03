@@ -8,13 +8,14 @@ import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { BsEyeSlashFill } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
+import { BsFacebook } from "react-icons/bs";
 
 
 
 const Register = () => {
 
-    const { RegisterUser} = useContext(AuthContext);
-    const {GoogleSingIn} = useContext(AuthContext);
+    const { RegisterUser,  FacebookLogin,GoogleSingIn} = useContext(AuthContext);
+   
     const [show, SetShow] = useState(true);
     console.log('show', show)
 
@@ -105,6 +106,38 @@ const Register = () => {
     }
 
 
+
+    // handleFacebook
+    const handleFacebook =() =>{
+
+      console.log('facebook login ');
+
+      FacebookLogin()
+      .then(res=>{
+          console.log(res.user);
+          if(res.user){
+                   // sweet alert
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Facebook Registration Successful",
+          showConfirmButton: false,
+          timer: 2000
+        });
+
+        // navigate into home page 
+        navigate('/');
+          }
+       
+
+
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    }
+
+
     // handleEyeButton 
     const handleEyeButton = ()=>{
      
@@ -182,11 +215,26 @@ const Register = () => {
                 </div>
               </form>
 
-            <div className="">
+{/* Social Login */}
+            <div className=" flex gap-2 flex-col-1 lg:flex-row justify-center items-center justify-items-center">
         
-            <button onClick={handleGoogle} className="btn p-y flex gap-1 border mx-auto w-2xs items-center  text-3xl font-bold bg-amber-300">
+        <div>
+            <button onClick={handleGoogle} className="btn p-y flex gap-1 border mx-auto w-[230px] items-center  text-3xl font-bold bg-amber-300">
             <FcGoogle className="text-4xl "></FcGoogle>  Google </button>
             </div>
+           
+
+
+            <div className="">
+        
+        <button onClick={handleFacebook} className="btn p-y flex gap-1 border mx-auto w-[230px] items-center  text-3xl font-bold bg-amber-300">
+        <BsFacebook className="text-4xl text-blue-600"></BsFacebook>  FaceBook </button>
+       
+        </div>
+
+        </div>
+
+
             </div>
           </div>
         </div>
