@@ -7,7 +7,7 @@ import { BsFacebook } from "react-icons/bs";
 
 const Login = () => {
 
-  const { LoginUser,FacebookLogin,GoogleSingIn} = useContext(AuthContext);
+  const { SetUser, LoginUser,FacebookLogin,GoogleSingIn} = useContext(AuthContext);
 
 
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ const Login = () => {
     let from = location.state?.from?.pathname || "/";
 
 
+    // Email & Password Login
   const handleLogin = (e)=>{
     e.preventDefault();
     const form = e.target;
@@ -64,6 +65,7 @@ const Login = () => {
         GoogleSingIn()
         .then(res=>{
           console.log(res.user);
+          SetUser(res.user);
           
           // sweet alert
           Swal.fire({
@@ -96,7 +98,8 @@ const Login = () => {
         FacebookLogin()
         .then(res=>{
             console.log(res.user);
-            if(res.user){
+           SetUser(res.user);
+           
                      // sweet alert
           Swal.fire({
             position: "top-end",
@@ -109,7 +112,7 @@ const Login = () => {
           // navigate into home page 
           // navigate('/');
           navigate(from, { replace: true });
-            }
+          
          
   
   

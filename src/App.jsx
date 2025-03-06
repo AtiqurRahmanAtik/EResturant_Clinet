@@ -11,6 +11,7 @@ import Login from './Components/Pages/Login'
 import Register from './Components/Pages/Register'
 import RegisterUserUpdate from './Components/RegisterUserUpdate'
 import PrivateRoutes from './Components/PrivateRoutess/PrivateRoutes'
+import AddCard from './Components/AddCard/AddCard'
 
 
 
@@ -31,7 +32,7 @@ function App() {
     
        <Route path='/allUser'  element={<AllUsers/>}></Route>
       
-       
+       <Route path='/addCard' element={<AddCard/>}></Route>
        
         <Route path='/update/:id' element={<RegisterUserUpdate/>}></Route>
 

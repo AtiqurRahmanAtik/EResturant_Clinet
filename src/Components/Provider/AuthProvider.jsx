@@ -57,7 +57,12 @@ const AuthProvider = ({children}) => {
         return signOut(auth)
     }
 
-
+    //handleCard
+    const handleADD = (item)=>{
+        console.log(item);
+        return item;
+      }
+  
 
     // Observation
    
@@ -79,6 +84,7 @@ const AuthProvider = ({children}) => {
     // AuthInfo
     const AuthInfo = {
         user,
+        SetUser,
         loader,
         SetLoader,
        
@@ -87,7 +93,10 @@ const AuthProvider = ({children}) => {
         registerUser,
         GoogleSingIn,
         SingOutUser ,
-        FacebookLogin
+        FacebookLogin,
+        handleADD,
+      
+        
 
     }
 

@@ -2,6 +2,12 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "./Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { RiShoppingCartLine } from "react-icons/ri";
+
+
+
+
+
 
 
 const Navbar = () => {
@@ -9,6 +15,9 @@ const Navbar = () => {
     const {user} = useContext(AuthContext);
     // console.log(user);
     const {SingOutUser } = useContext(AuthContext);
+
+
+  
 
     const handleLogOut= ()=>{
       console.log('log Out');
@@ -33,11 +42,22 @@ const Navbar = () => {
 
 
 
+  //  handleCardStore
+  const handleCard =() =>{
+    console.log('card click');
+  }
+   
+
+
+
+
     const links = <>
    <NavLink to={'/'}>   <li className="text-2xl font-semibold hover:bg-red-400 hover:text-white"><a>Home</a></li></NavLink>
     <NavLink to={'/allUser'}>   <li  className="text-2xl font-semibold hover:bg-red-400 hover:text-white"><a>AllUsers</a></li></NavLink>
    
     <NavLink to={'/about'}>   <li  className="text-2xl font-semibold hover:bg-red-400 hover:text-white"><a>About</a></li></NavLink>
+
+   
     </>;
 
     return (
@@ -75,11 +95,25 @@ const Navbar = () => {
   {!user?
   
   <div className="navbar-end">
+    <div>
+   <Link to={'/addCard'}>
+   <RiShoppingCartLine onClick={handleCard} className="text-3xl mx-4"></RiShoppingCartLine>
+   </Link>
+    </div>
     <Link to={'/login'}> <button className="btn bg-orange-500 text-2xl border-none">Login</button></Link>
   </div> :
 
 <div className="navbar-end">
-<div  className="dropdown dropdown-end">
+
+  
+
+<div  className="dropdown dropdown-end ">
+<div>
+   <Link to={'/addCard'}>
+   <RiShoppingCartLine  onClick={handleCard} className="text-3xl mx-4"></RiShoppingCartLine>
+   </Link>
+    </div>
+
 <div tabIndex={0} role="button" className="btn w-14 btn-ghost btn-circle  avatar">
   <div className="w-14  rounded-full">
     <img 

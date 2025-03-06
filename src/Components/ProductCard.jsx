@@ -1,4 +1,6 @@
+import axios from "axios";
 import { Link } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
 
 
 const ProductCard = ({item}) => {
@@ -8,9 +10,27 @@ const ProductCard = ({item}) => {
 
 
     // handleBuy Button 
-    const handleBuy = (item)=>{
+    const handleADD = (item)=>{
       console.log(item);
+      try{
+        axios.post('http://localhost:5000/card/post',item)
+      .then(res=>{
+        const result= res.data;
+        console.log(result)
+        if(result.insertedId){
+          toast.success('SuccessFully Add To Card !');
+        }
+      })
+    
+       
+     
+  
     }
+    catch(err){
+      console.log(err)
+    }
+  }
+
 
     return (
         <div>
@@ -32,7 +52,9 @@ const ProductCard = ({item}) => {
 
       {/* Buy Button  */}
     <div className="card-actions justify-evenly my-2">
-      <button onClick={()=> handleBuy(item)} className="btn text-2xl font-semibold  bg-orange-500">Buy</button>
+      <button onClick={()=> handleADD(item)} className="btn text-2xl font-semibold  bg-orange-500">ADD</button>
+    
+
       <Link to={`/${_id}`}> <button className="btn text-2xl font-semibold bg-orange-500">Details</button></Link>
     </div>
   </div>
