@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { AuthContext } from "./Provider/AuthProvider";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import {  useQuery } from "@tanstack/react-query";
 
 const Product = () => {
   // const [item, setItem] = useState([]);

@@ -98,6 +98,9 @@ const Navbar = () => {
     <div>
    <Link to={'/addCard'}>
    <RiShoppingCartLine onClick={handleCard} className="text-3xl mx-4"></RiShoppingCartLine>
+
+   
+
    </Link>
     </div>
     <Link to={'/login'}> <button className="btn bg-orange-500 text-2xl border-none">Login</button></Link>
@@ -111,6 +114,8 @@ const Navbar = () => {
 <div>
    <Link to={'/addCard'}>
    <RiShoppingCartLine  onClick={handleCard} className="text-3xl mx-4"></RiShoppingCartLine>
+
+  
    </Link>
     </div>
 
