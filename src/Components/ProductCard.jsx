@@ -8,12 +8,15 @@ const ProductCard = ({ item }) => {
 
   const {
     _id,
-    title,
-    description,
-    category,
-    price,
-    discountPercentage,
-    rating,
+    ProductName,
+    BrandName,
+    Category,
+    ProductImage,
+    Price,
+    Description,
+   
+    Ratings,
+    ProductCreationDateTime
   } = item;
 
   // handleBuy Button
@@ -43,15 +46,21 @@ const ProductCard = ({ item }) => {
       <div className="card bg-base-100  shadow-sm">
         <figure>
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+          className="w-[410px] h-[250px]"
+            src={ProductImage}
             alt="Shoes"
           />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{title}</h2>
-
-          <h2>Price : {price}</h2>
-          <p> {description}</p>
+          <h2 className="card-title">{ProductName}</h2>
+          
+          <div>
+            <h2> Category :  {Category}</h2>
+            <h2> BrandName : {BrandName}</h2>
+          </div>
+          <h2>Price : ${Price}</h2>
+          <p> {Description}</p>
+          <h2> Ratings :{Ratings}</h2>
 
           {/* Buy Button  */}
           <div className="card-actions justify-evenly my-2">

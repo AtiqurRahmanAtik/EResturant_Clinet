@@ -9,12 +9,12 @@ const TopRatedItem = () => {
     const [TopRated,SetTopRated]= useState([]);
     // console.log(TopRated);
 
-    const assendingProduct = TopRated.sort((a,b)=> b.rating - a.rating);
+    const assendingProduct = TopRated.sort((a,b)=> b.Ratings - a.Ratings);
 
     // console.log(assendingProduct)
 
     useEffect(()=>{
-        fetch('http://localhost:5000/user')
+        fetch('http://localhost:5000/product')
         .then(res=> res.json())
         .then(data=> SetTopRated(data))
         SetLoader(false)
@@ -47,14 +47,15 @@ const TopRatedItem = () => {
                         <div key={item._id} className="card bg-base-100 text-center  shadow-sm">
               <figure className="px-10 pt-10">
                 <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                
+                  src={item.ProductImage}
                   alt="Shoes"
-                  className="rounded-xl" />
+                  className="rounded-xl w-[410px] h-[250px]" />
               </figure>
               <div className="card-body items-center text-center">
-                <h2 className="card-title">{item.title}</h2>
+                <h2 className="card-title">{item.ProductName}</h2>
 
-                <h2 className="text-2xl text-red-600">{item.rating}</h2>
+                <h2 className="text-2xl text-red-600">{item.Ratings}</h2>
                 <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
                 <div className="card-actions">
                   <button className="btn btn-primary">Buy Now</button>

@@ -5,7 +5,19 @@ import { AuthContext } from "./Provider/AuthProvider";
 
 
 const CardDetails = ({item, refetch}) => {
-    const {_id,title,description,category,price,discountPercentage,rating} = item;
+  const {
+    _id,
+    ProductName,
+    BrandName,
+    Category,
+    ProductImage,
+    price,
+    Description,
+   
+    Ratings,
+    ProductCreationDateTime
+  }  = item;
+
 
     const {loader} = useContext(AuthContext);
 
@@ -44,18 +56,20 @@ const CardDetails = ({item, refetch}) => {
     return (
         <div className="card bg-base-100  shadow-sm">
               <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                <img className="w-[410px] h-[250px]"
+                  src={ProductImage}
                   alt="Shoes" />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">
-                   {title}
+                   {ProductName}
                   
                 </h2>
+                <h2> {Category}</h2>
+                <h2>{BrandName}</h2>
             
                 <h2>Price : {price}</h2>
-                <p> {description}</p>
+                <p> {Description}</p>
             
             
                

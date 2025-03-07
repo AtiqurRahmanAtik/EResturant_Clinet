@@ -17,6 +17,7 @@ const Product = () => {
   // console.log(item);
   const { loader, SetLoader } = useContext(AuthContext);
   const [searhItem,SetSearhItem] = useState('');
+  const[category,SetCategory] = useState('all');
 
   const[selectItem, SetSeletedItem] = useState('');
 
@@ -48,7 +49,7 @@ const Product = () => {
   const {data: Item,isLoading,refetch} = useQuery({
     queryKey: ['product'],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:5000/user')
+      const res = await axios.get('http://localhost:5000/product')
       return res.data;
       
     },
@@ -74,7 +75,7 @@ const Product = () => {
   refetch();
 
 
-    const searhingOutPut = Item?.filter(val=> val.title?.toLowerCase().includes(searhItem.toLowerCase()));
+    const searhingOutPut = Item?.filter(val=> val.ProductName?.toLowerCase().includes(searhItem.toLowerCase()));
 
   // console.log(searhingOutPut);
 
@@ -97,7 +98,7 @@ const Product = () => {
 
 
      
-      const bigPrice = BigPrice.sort((a,b)=> b.price - a.price);
+      const bigPrice = BigPrice.sort((a,b)=> b.Price - a.Price);
 
       // console.log(bigPrice)
       // handle Price 
@@ -119,8 +120,8 @@ const Product = () => {
 
       if(selectItem == 'A to Z Products'){
         let Uppercase = Item.sort((a,b)=>{
-          const laterA =  a.title ;
-          const laterB = b.title;
+          const laterA =  a.ProductName ;
+          const laterB = b.ProductName;
 
           if(laterA < laterB){
             return -1;
@@ -134,8 +135,8 @@ const Product = () => {
 
       if(selectItem == 'Z to A Product'){
         const LowerCase = Item.sort((a,b)=>{
-          const letterA = a.title;
-          const letterB = b.title;
+          const letterA = a.ProductName;
+          const letterB = b.ProductName;
 
           if(letterA > letterB){
             return -1;
@@ -146,15 +147,25 @@ const Product = () => {
      if(selectItem == 'High to Low'){
 
       let highPrice =   Item.sort((a,b) => {
-          return b.price - a.price;
+          return b.Price - a.Price;
         })
      }
 
      if(selectItem == 'Low to High'){
 
       let LowPrice =   Item.sort((a,b) => {
-          return a.price - b.price;
+          return a.Price - b.Price;
         })
+     }
+
+
+     const selectCategory = Item.filter((item)=> {
+      return (category === 'all' || item.Category === category)
+    })
+
+     const handleCategory =(e)=>{
+      SetCategory(e.target.value)
+     
      }
 
     //  handleResetButton 
@@ -196,6 +207,23 @@ const Product = () => {
    </div>
 
 
+   {/* Category ways filter here  */}
+    <div>
+      <label htmlFor="">Filter by Category</label>
+    <select onChange={handleCategory} name="item" id="">
+        <option value='all'> All</option>
+        <option value='Accessories'> Accessories</option>
+        <option value='Personal Care'> Personal Care</option>
+        <option value='Furniture'> Furniture</option>
+        <option value='Footwear'>Footwear</option>
+        <option value='Electronics'>Electronics</option>
+        
+         
+       
+        </select>
+    </div>
+
+
 {/* searhing form here */}
         <div>
         <form className="flex justify-center gap-1" onSubmit={handleSearching}>
@@ -230,7 +258,7 @@ const Product = () => {
       
 
       <div className="grid z-20 gap-3 my-7 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
-        {searhingOutPut?.map((item) => (
+        {selectCategory?.map((item) => (
           <ProductCard key={item._id} item={item}></ProductCard>
         ))}
       </div>
