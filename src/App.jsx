@@ -37,9 +37,9 @@ function App() {
         <Route path='/update/:id' element={<RegisterUserUpdate/>}></Route>
 
         {/* private route */}
-        <Route element={<PrivateRoutes/>}>
+     
         <Route path='/about' element={<About/>}></Route>
-        </Route>
+    
        
         <Route path='/:id' element={<ProductDetails></ProductDetails>}> </Route>
         

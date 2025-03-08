@@ -1,5 +1,5 @@
 import { useContext,} from "react";
-import { Navigate, Outlet, useLocation, useNavigate,  } from "react-router";
+import { Navigate, Outlet, useLocation,  } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 
