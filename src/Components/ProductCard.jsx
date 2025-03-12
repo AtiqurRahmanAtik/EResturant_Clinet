@@ -2,6 +2,8 @@ import axios from "axios";
 import { Link } from "react-router";
 import { toast, ToastContainer } from "react-toastify";
 import Swal from "sweetalert2";
+import { motion } from "motion/react";
+import PropTypes from "prop-types";
 
 const ProductCard = ({ item }) => {
   // console.log(item);
@@ -42,8 +44,21 @@ const ProductCard = ({ item }) => {
   };
 
   return (
-    <div>
-      <div className="card bg-base-100  shadow-sm">
+    <dev >
+
+      <motion.div 
+    //  initial={{ opacity:0}}
+    //  whileInView={{opacity:1}}
+    
+    //  transition={{duration:0.5, delay:0.1}}
+
+    initial={{opacity:0, y:70}}
+    whileInView={{opacity:1,  y:0}}
+    animate={{rotate:360}}
+    
+    transition={{duration:0.7 , delay:0.1, ease:'easeIn' }}
+      
+      className="card bg-base-100  shadow-sm">
         <figure>
           <img
           className="w-[410px] h-[250px]"
@@ -79,9 +94,28 @@ const ProductCard = ({ item }) => {
             </Link>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </dev>
   );
 };
+
+
+
+
+
+//  PropTypes validation
+ProductCard.propTypes = {
+  item: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    ProductName: PropTypes.string.isRequired,
+    BrandName: PropTypes.string.isRequired,
+    Category: PropTypes.string.isRequired,
+    ProductImage: PropTypes.string.isRequired,
+    Price: PropTypes.number.isRequired,
+    Description: PropTypes.string.isRequired,
+    Ratings: PropTypes.number.isRequired,
+    ProductCreationDateTime: PropTypes.string.isRequired, // can be string or Date
+  }).isRequired
+}
 
 export default ProductCard;

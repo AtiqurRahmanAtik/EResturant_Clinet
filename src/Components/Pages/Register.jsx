@@ -41,6 +41,9 @@ const Register = () => {
         .then(res=>{
          
           const result = res.data;
+          const token = res.data.token;
+          
+
         console.log(result);
           if(result.insertedId ){
             Swal.fire({
@@ -52,7 +55,7 @@ const Register = () => {
             });
 
             // reset form
-            form.reset();
+            // form.reset();
            
           }
 
@@ -60,6 +63,7 @@ const Register = () => {
         RegisterUser(email,password)
         .then(res=>{
           console.log(res.user);
+          // localStorage.setItem('token', res.user.accessToken)
           
      
        

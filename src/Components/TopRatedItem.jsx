@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { data } from "react-router";
 import { AuthContext } from "./Provider/AuthProvider";
-
+import { motion } from "motion/react";
 
 const TopRatedItem = () => {
 
@@ -37,14 +37,27 @@ const TopRatedItem = () => {
 
     
     return (
-        <div >
-            <h1 className="text-3xl font-bold text-center my-7">Our Top Rated Products</h1>
+        <div 
+        
+        >
+            <h1 className="text-3xl font-bold text-center my-7  ">Our Top Rated Products</h1>
 
 
-            <div className=" grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+            <div
+            
+
+            className=" grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
                 {
                     assendingProduct.slice(0,3).map(item=> 
-                        <div key={item._id} className="card bg-base-100 text-center  shadow-sm">
+
+                        <motion.div
+                        initial={{opacity:0, y:50}}
+                        whileInView={{opacity:1,  y:0}}
+                        animate={{rotate:360}}
+                        
+                        transition={{duration:1.5, delay:0.1, ease: 'easeIn'}}
+
+                        key={item._id} className="card bg-base-100 text-center  shadow-sm ">
               <figure className="px-10 pt-10">
                 <img
                 
@@ -61,7 +74,7 @@ const TopRatedItem = () => {
                   <button className="btn btn-primary">Buy Now</button>
                 </div>
               </div>
-            </div>)
+            </motion.div>)
                 }
             </div>
         </div>

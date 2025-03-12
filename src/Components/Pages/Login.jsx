@@ -29,9 +29,15 @@ const Login = () => {
     console.log(loginUsers);
 
     // call loginUser form AuthProvider
+    //login api post here
+
+
+
     LoginUser(email,password)
     .then(res=>{
       console.log(res);
+
+      
 
       if(res){
           Swal.fire({

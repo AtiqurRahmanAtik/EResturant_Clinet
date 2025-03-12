@@ -3,6 +3,9 @@ import ProductCard from "./ProductCard";
 import { AuthContext } from "./Provider/AuthProvider";
 import axios from "axios";
 import {  useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
+
+
 
 const Product = () => {
   // const [item, setItem] = useState([]);
@@ -174,13 +177,18 @@ const Product = () => {
     }
 
 
-
+   
 
   return (
-    <div className="relative">
-      <h1 className="text-3xl font-bold text-center my-5 ">
+    <div  className="relative ">
+    <motion.h1 
+    initial={{opacity:0}}
+    whileInView={{opacity:1}}
+    transition={{duration:3, delay:2}}
+    
+    className="text-3xl font-bold text-center my-5 ">
         Our Product Section
-      </h1>
+      </motion.h1>
 
 
 
@@ -257,11 +265,14 @@ const Product = () => {
       {/* sort item here  */}
       
 
-      <div className="grid z-20 gap-3 my-7 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
+      <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}    className="grid z-20 gap-3 my-7 grid-cols-1 md:grid-cols-2  lg:grid-cols-3">
         {selectCategory?.map((item) => (
           <ProductCard key={item._id} item={item}></ProductCard>
         ))}
-      </div>
+      </motion.div>
+
     </div>
   );
 };

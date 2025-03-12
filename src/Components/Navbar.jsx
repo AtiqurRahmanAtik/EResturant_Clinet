@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { RiShoppingCartLine } from "react-icons/ri";
 
 
+import { motion } from "motion/react";
+import {useScroll} from 'motion/react';
 
 
 
@@ -12,11 +14,14 @@ import { RiShoppingCartLine } from "react-icons/ri";
 
 const Navbar = () => {
 
+  const { scrollYProgress } = useScroll();
+
+
     const {user} = useContext(AuthContext);
     // console.log(user);
     const {SingOutUser } = useContext(AuthContext);
 
-
+  
   
 
     const handleLogOut= ()=>{
@@ -61,8 +66,15 @@ const Navbar = () => {
     </>;
 
     return (
-        <div>
-            <div className="navbar bg-green-400 shadow-sm">
+        <header className=" ">
+
+          <motion.section>
+            <motion.div className="progress-bar bg-red-500 fixed top-0 left-0 z-40 right-0 h-2.5 origin-left" style={{ scaleX : scrollYProgress }}>
+
+            </motion.div>
+          </motion.section>
+
+            <nav  className="navbar border relative  bg-green-400 shadow-sm">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -147,9 +159,9 @@ const Navbar = () => {
 
  
  
-</div>
+</nav>
 
-        </div>
+        </header>
     );
 };
 
