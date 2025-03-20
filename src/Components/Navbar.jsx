@@ -74,7 +74,7 @@ const Navbar = () => {
             </motion.div>
           </motion.section>
 
-            <nav  className="navbar border relative  bg-green-400 shadow-sm">
+            <nav  className="navbar  relative  bg-green-400 shadow-sm">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

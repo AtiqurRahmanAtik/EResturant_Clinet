@@ -69,6 +69,9 @@ const RegisterUserUpdate = () => {
         <div>
             <h1 className="text-3xl font-bold text-center my-9">Register User Update</h1>
 
+            
+            <h1 className="text-3xl font-bold text-center my-9">Register User Update</h1>
+
 
             <div className="card bg-base-100 w-full  shrink-0 shadow-2xl">
             <div className="card-body mx-auto">

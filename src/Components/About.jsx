@@ -34,6 +34,9 @@ const About = () => {
   console.log(ButtonCategory);
 
 
+  // Pagination state
+
+
   useEffect(()=>{
     axios.get('http://localhost:5000/product')
     .then(res=>{
@@ -42,13 +45,14 @@ const About = () => {
       
       SetLoader(false);
     })
-  },[])
+  },[SetLoader])
 
   const handleButton = () => {
     SetValue(!value);
   };
 
 
+    
       // categories
         const categoryies = ['all',...new Set(products.map(p=> p.Category)) ];
 
@@ -92,8 +96,16 @@ const About = () => {
         const buttonCategory = filterProducts.filter(product=>{
           return product.Category === ButtonCategory;
         })
+           // console.log('button : ', buttonCategory)
 
-        // console.log('button : ', buttonCategory)
+
+      
+  
+             
+ 
+       
+
+
 
         // handleSearch
         const handleSearch = (e)=>{
@@ -132,7 +144,7 @@ const About = () => {
 
 
   return (
-    <section>
+    <section className="z-0">
 
 
       <h1 className="text-2xl text-center font-bold ">
@@ -260,8 +272,12 @@ const About = () => {
       </div>
       </section>
 
-      
-      
+
+
+       {/* Pagination Buttons */}
+     
+
+
     </section>
   );
 };
